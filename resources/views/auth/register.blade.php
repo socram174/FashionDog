@@ -57,8 +57,32 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="off" disabled>
 
+                                <input id="text2" type="text" class="form-control" disabled>
+                                <button type="button" onclick="myFunction()">Generate A Random Password</button>
+                                <script>
+
+                                    function myFunction() {
+
+                                        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                                        let password = "";
+                                        let largo = Math.floor(Math.random() * (15 - 10) + 10);
+
+                                        for (let i = 0; i < largo; i++) {
+                                            let generate = letters[Math.floor(Math.random() * 62)];
+                                            password += generate;
+
+                                        }
+                                        console.log(password);
+
+
+                                        document.getElementById("password").defaultValue = password;
+                                        document.getElementById("text2").defaultValue = password;
+                                        document.getElementById("password-confirm").defaultValue = password;
+
+                                    }
+                                </script>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -71,15 +95,21 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" disabled>
                             </div>
                         </div>
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button onclick="activatePasswordFields()" type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                <script>
+                                    function activatePasswordFields(){
+                                        document.getElementById("password").disabled = false;
+                                        document.getElementById("password-confirm").disabled = false;
+                                    }
+                                </script>
                             </div>
                         </div>
                     </form>
