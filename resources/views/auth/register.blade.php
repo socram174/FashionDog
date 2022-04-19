@@ -58,23 +58,25 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="off" disabled>
-
                                 <input id="text2" type="text" class="form-control" disabled>
-                                <button type="button" onclick="myFunction()">Generate A Random Password</button>
+                                <button type="button" onclick="generateRandomPassword()">Generate A Random Password</button>
+                                <div class="d-grid gap-2 col-6 mx-auto">
+                                    <button class="btn btn-primary" type="button" onclick="generateRandomPassword()">Generate password</button>
+                                </div>
                                 <script>
 
-                                    function myFunction() {
+                                    function generateRandomPassword() {
 
                                         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                                         let password = "";
-                                        let largo = Math.floor(Math.random() * (15 - 10) + 10);
+                                        let largo = Math.floor(Math.random() * (16 - 10) + 10);
 
                                         for (let i = 0; i < largo; i++) {
                                             let generate = letters[Math.floor(Math.random() * 62)];
                                             password += generate;
 
                                         }
-                                        console.log(password);
+                                        console.log("Password: " ,password, "| Length: " ,password.length);
 
 
                                         document.getElementById("password").defaultValue = password;
@@ -82,6 +84,8 @@
                                         document.getElementById("password-confirm").defaultValue = password;
 
                                     }
+
+
                                 </script>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
